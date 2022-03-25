@@ -1,4 +1,5 @@
 # salve professor Felippe Fernandes  da Silva ! <3
+# é us guri do python
 
 #simulador do ciclo de instrução do computador.
 # 1) Entrada de dados
