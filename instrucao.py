@@ -1,8 +1,8 @@
 class Instrucao:
-    def __init__(self, opcode, instrucao):
+    def __init__(self, opcode, endereco):
         self.opcode=opcode
-        self.instrucao=instrucao 
+        self.endereco=endereco 
     def getOpcode(self):
         return self.opcode
-    def getInstrucao(self):
-        return self.instrucao   
+    def getEndereco(self):
+        return self.endereco
