@@ -21,9 +21,11 @@
 # quer que implemente as operações?  Sim
 # implementar memoria? Sim
 
+from xml.etree.ElementTree import tostring
 from instrucao import Instrucao
 from uc import Uc
 import numpy as np
+from tools import *
 
 
 #0100 Soma
@@ -67,35 +69,44 @@ memory=np.array(range(255))
 #         uc.setMar()
 #         print(uc.mar)
 #         uc.incrementarPc()
-    
-    
-    
-
-
 
 n1="0110"
 n2="1101"
 resultado=""
 carryin=0
+# 1011
+  
+#print(resultado)
 
-for i in range(len(n1)):
-    if n1[i]==1 and n2[i]==1:
-        if carryin ==1:
-            resultado+='1'
-        else:
-            resultado += '0'
-        carryin = 1
-    elif n1[i] == 0 and n2[i]==0:
-        if carryin ==1:
-            resultado+='1'
-        else:
-            resultado += '0'
-        carryin = 0
-    elif n1[i] != n2[i]:
-        if carryin == 1:
-            resultado +='0'
-        else:
-            resultado += '1'
-        carryin =0           
 
-print(resultado)
+#Soma
+# for i in range(len(n1)):
+#     aux2 = int(n1[-(i+1)]) ^ int(n2[-(i+1)]) ^ carryin
+#     resultado += str(int(aux2))
+#     if ((int(n1[-(i+1)]) + int(n2[-(i+1)]))==2) or ((int(n1[-(i+1)]) ^ int(n2[-(i+1)]))==1 and carryin==1):
+#           carryin=1
+#     else:
+#         carryin=0
+# resultado += str(carryin)        
+# print(resultado[::-1]) 
+
+
+
+
+
+
+stringas = "100100"
+complementoDois(stringas)
+
+
+            
+
+stringas = complementoDois(stringas)
+print(stringas)  
+print(transformarNegativo(stringas))
+
+teste1 = "101"
+teste2 = "111"
+print(multiplicacao(teste1,teste2))
+# print(stringas)
+        
