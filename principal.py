@@ -1,5 +1,5 @@
 from instrucao import Instrucao
-from uc import Uc
+from uc import Uc              
 import numpy as np
 from tools import *
 from auxliar import *
@@ -40,7 +40,7 @@ memory=np.array(range(255))
 #         uc.incrementarPc()
 
 n1="0110"
-n2="1010"
+n2="110"
 resultado=""
 carryin=0
 
@@ -54,6 +54,10 @@ carryin=0
 # igualaCasas(n1,n2)
 
 multiplicacao(n1,n2)
+
+
+# print(soma(soma(soma("0000000","0001100"),"0011000"),"0110000"))
+
 # stringas = complementoDois(stringas)
 # print(stringas)  
 # print(transformarNegativo(stringas))
