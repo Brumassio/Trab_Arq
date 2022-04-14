@@ -26,6 +26,7 @@ def complementoDois(num):
     return aux
 
 def soma(n1,n2):
+    n1,n2=igualaCasas(n1,n2)
     carryin = 0
     resultado = ""
     aux2 = 0
@@ -50,32 +51,39 @@ def igualaCasas(num1,num2):
         print(string_list1," ",string_list2)
     else:
         aux = len(string_list2) - len(string_list1)
+        print("VALOR MAIS A ESQUERDA=",num1[0])
         while aux != 0:
             string_list1.insert(0,num1[0])
             aux -= 1
         print(string_list1, " ",string_list2)
-
+    return string_list1,string_list2
 
 def multiplicacao(num1,num2):
     
     linha=[]
-    igualaCasas(num1,num2)
-    string_list1 = list(num1)
-    string_list2 = list(num2)
-    aux=""
+    # string_list1 = list(num1)
+    # string_list2 = list(num2)
+    
+    string_list1, string_list2 = igualaCasas(num1,num2)
+    print(string_list1,"string 2: ", string_list2)
     for i in range(len(string_list1)):
+        aux = []
         for j in range(len(string_list2)):
-            if string_list1[i] == "0":
-                aux += "0"
-            elif string_list1[i] == "1" and string_list2[j] == "0":
-                aux += "0"
-            elif string_list1[i] == "1" and string_list2[j] == "1":
-                aux += "1"     
-
+            if string_list1[-(i+1)] == "0":
+                aux.insert(0,"0");
+            elif string_list1[-(i+1)] == "1" and string_list2[-(j+1)] == "0":
+                aux.insert(0,"0")
+            elif string_list1[-(i+1)] == "1" and string_list2[-(j+1)] == "1":
+                aux.insert(0,"1");   
+            
         for k in range(i):
-            aux+="0"    # aux += str((int(num1[(j)]))*(int(num2[-(i)])))
+            aux.append("0");  
         linha.append(aux)
-        aux =""
+
+
+    for i in linha:
+        i=igualaCasas(i,linha[-1])
+
     print(linha)
 
     aux2 = 0
@@ -116,7 +124,6 @@ def divisao(num, den):
             used+=1
          
 
-   print(resultado)
 
 
 
