@@ -3,41 +3,36 @@ from uc import Uc
 import numpy as np
 from tools import *
 from auxliar import *
+from ula import *
 
-lista = []
+# lista = []
 memory=np.array(range(255))
 
 
-# uc= Uc()
-# memory[1]=Instrucao("0101", "10101010")
+uc= Uc()
+# ula= ula()
+memory[1]=Instrucao("0101", "101010100001")
 
-# uc.adicionarEnderecoPc("00000001")
+uc.adicionarEnderecoPc("00000001")
 
-# memory[2]=Instrucao("0100", "10100000")
+memory[2]=Instrucao("0100", "101000000001")
 
-# uc.adicionarEnderecoPc("00000010")
+uc.adicionarEnderecoPc("00000010")
 
 
 # uc.printarTudo()
 
-# while uc.count <=len(uc.pc)-1:
-#     uc.setMar()
-#     # uc.buscaMemoria()
-#     # uc.realizarOperacao()
+while uc.count <=len(uc.pc)-1:
+    uc.setMar()
+    if uc.buscaMemoria():#seta o mbr
+        uc.setRegistradores()
+        uc.realizaOperacao()
+    
 
-#     uc.incrementarPc()
-
-
-
-        
+    uc.incrementarPc()
 
     
-# print(uc.count)
-# for i in range(uc.count):
-#     if uc.count <= len(uc.pc):
-#         uc.setMar()
-#         print(uc.mar)
-#         uc.incrementarPc()
+
 
 n1="0110"
 n2="110"
