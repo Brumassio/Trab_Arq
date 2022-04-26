@@ -24,6 +24,7 @@ class Pipeline:
         limite=0
         self.clock=0
         threads=[]
+
         
         while(limite<5):
             procedure=Thread(target=self.inicializaPipiline, args=[limite,uc,memory,ula])
@@ -60,6 +61,10 @@ class Pipeline:
 
         for j in range(self.clock):
             print("Clock ",j,"= ",self.regClock[j])
+        i =0 
+        for p in self.hazards:
+            print(f"harazard[{i}] = {p}")
+            i+=1
         for x in threads:
             x.join()
         
