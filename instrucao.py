@@ -4,5 +4,5 @@ class Instrucao:
         self.operando=operando 
     def getOpcode(self):
         return self.opcode
-    def getoperando(self):
+    def getOperando(self):
         return self.operando
