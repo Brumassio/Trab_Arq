@@ -17,6 +17,8 @@ def transformarNegativo(num):
         while aux>=0:
             string_list[aux]=str(int(not(int(num[aux]))))
             aux-=1
+
+    string_list[0]="1"        
     num= "".join(string_list)
     #print(num)
     return num   
@@ -25,14 +27,18 @@ def complementoDois(num):
     aux="0"+num
     return aux
 
+def complementoDois2(num, sinal):
+    aux=sinal+num
+    return aux
+
 def verificaSinalMagnita(num1,num2):
-    if num1[0] == "1" and num2[1] == "1":
+    if num1[0] == "1" and num2[0] == "1":
         return 2
-    elif num1[0] == "0" and num2[1] == "0":    
+    elif num1[0] == "0" and num2[0] == "0":    
         return 3
-    elif num1[0] == "1" and num2[1] == "0":
+    elif num1[0] == "1" and num2[0] == "0":
         return 0
-    elif num1[0] == "0" and num2[1] == "1":
+    elif num1[0] == "0" and num2[0] == "1":
         return 1
 
 def igualaCasas(num1,num2):
