@@ -22,18 +22,6 @@ class Uc:
     def  incrementarPc(self):
         self.count+=1
 
-
-        
-    # def printarPcAtual(self):
-    #     print(self.pc[self.count].getOpcode())
-    #     print(self.pc[self.count].getInstrucao())
-
-    # def printarTudo(self):
-    #     while self.uc.count <=len(self.uc.pc)-1:
-    #         self.uc.setMar()
-    #         print(self.uc.pc[self.uc.count])
-    #         self.uc.incrementarPc()    
-
     def buscaMemoria(self, memory):
        endereco= int(self.mar,2)
        if len(memory)>endereco:
@@ -51,49 +39,48 @@ class Uc:
             if self.mbr.operando[:6]=="000000":
                 resultado= ula.soma(ac,operando[7:])
                 print(f"resultado soma={resultado}")
-                return resultado
+                return resultado,"ac"
             elif self.mbr.operando[7:]=="000000":
                 resultado=ula.soma(ac,operando[:6])
                 print(f"resultado soma={resultado}")
-                return resultado
+                return resultado,"ac"
             else:
                 resultado=ula.soma(operando[:6],operando[7:])
                 print(f"resultado soma={resultado}")
-                return resultado
+                return resultado,"ac"
 
         elif self.mbr.opcode =="0010":
 
             if self.mbr.operando[:6]=="000000":
                 resultado=ula.subtracao(ac,operando[7:])
-                return resultado
+                return resultado,"ac"
             elif self.mbr.operando[7:]=="000000":
                 resultado=ula.subtracao(ac,operando[:6])
-                return resultado
+                return resultado,"ac"
             else:
                 resultado=ula.subtracao(operando[:6],operando[7:])
-                return resultado
+                return resultado,"ac"
 
         elif self.mbr.opcode =="0011":
             if self.mbr.operando[:6]=="000000":
                 resultado=ula.divisao(mq,operando[7:])
-                return resultado
+                return resultado,"mq"
             elif self.mbr.operando[7:]=="000000":
                resultado=ula.divisao(mq,operando[:6])
-               return resultado
+               return resultado,"mq"
             else:
                 resultado=ula.divisao(operando[:6],operando[7:]) 
-                return resultado
+                return resultado,"mq"
                 
         elif self.mbr.opcode =="0100": 
             
             if self.mbr.operando[:6]=="000000":
                  resultado=ula.multiplicacao(mq,operando[7:])
-                 return resultado
+                 return resultado,"mq"
             elif self.mbr.operando[7:]=="000000":
                 resultado=ula.multiplicacao(mq,operando[:6])
-                return resultado
+                return resultado,"mq"
             else:
                 resultado=ula.multiplicacao(operando[:6],operando[7:])
-                return resultado
+                return resultado,"mq"
             
-        return resultado

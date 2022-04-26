@@ -10,19 +10,19 @@ memory= [None]*255
 
 uc= Uc()
 ula= ula()
-memory[1]=Instrucao("0001", "001010100001")
+memory[1]=Instrucao("0001", "001010000001")
 
 uc.adicionarEnderecoPc("00000001")
 
-memory[2]=Instrucao("0100", "001000000001")
+memory[2]=Instrucao("0100", "001000000010")
 
 uc.adicionarEnderecoPc("00000010")
 
-memory[3]=Instrucao("0100", "000000000001")
+memory[3]=Instrucao("0100", "000111000011")
 
 uc.adicionarEnderecoPc("00000011")
 
-memory[4]=Instrucao("0011", "000000000011")
+memory[4]=Instrucao("0011", "000100000010")
 
 uc.adicionarEnderecoPc("00000100")
 
@@ -32,7 +32,6 @@ uc.adicionarEnderecoPc("00000101")
 
 pipeline = Pipeline()
 pipeline.carroChefe(uc,memory,ula)
-
 
 
 #TESTE DAS OPERACOES

@@ -35,7 +35,8 @@ class ula:
             return resultado[::-1]
 
     def subtracao(self,n1,n2): 
-        n2 = "1"+transformarNegativo(n2[2:])
+        print(f"n1={n1} n2={n2}")
+        n2 = "1"+transformarNegativo(n2)
         n1,n2=igualaCasas(n1,n2)
         subtr = self.soma(n1,n2)
         print("resultado subtracao=",subtr)
@@ -86,14 +87,14 @@ class ula:
         den=den[den.find("1"):]
         num=num[num.find("1"):]
         # aux=transformarNegativo(complementoDois(den))
-
+        print(num," e ", den)
         used=len(den)
         resto=num[:used]
         while ((len(num)-(used))>0):
                 
                 if((len(resto)==len(den) or (len(resto)>len(den)) and int(resto,2)>=int(den,2)) ):
 
-                    resto=self.subtracao(complementoDois(resto), complementoDois(den))
+                    resto=self.subtracao(complementoDois(resto), den)
                     
 
                     if(int(resto[1:],2)!=0):

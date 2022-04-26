@@ -7,9 +7,16 @@ class Pipeline:
         self.etapa = [-1]*5
         self.using=[[]]*5
         self.tratar=[1]*5
-        self.matrix=[list(range(1 + 8 * m, 1 + 8 * (m + 1)))
+        self.matrix=[list(range(1 + 20 * m, 1 + 20 * (m + 1)))
                             for m in range(5)]
         self.regClock=[]
+        self.hazards=[]
+        #0- PC
+        #1- MAR
+        #2- MBR
+        #3- IR
+        #4- AC
+        #5- MQ
         
 
 
@@ -27,30 +34,34 @@ class Pipeline:
         limite=1
         while self.etapa[4]!=3:
             print("CLOCK=",self.clock)
+            print("ETAPA4= ",self.etapa[4])
             self.regClock.append("")
             while(i<limite): 
-                if(self.etapa[i]!=3):
-                   self.etapa[i]+=1
+                if(self.etapa[i]!=4):
+                    if(self.conditionHazard(self.etapa,self.etapa[i],limite,i)):
+                        self.etapa[i]+=1
+                    else:
+                        break
                     # print("oi felippe fernandes")
                 i+=1
-                time.sleep(1)
-            time.sleep(2)
-            
+                # time.sleep(1)
+            time.sleep(1)
             self.clock+=1
-            if limite<5:
+            if limite<5 and limite==i:
                 limite+=1
             i=0
+            for j in range(5):
+                for k in range(len(self.matrix[j])):
+                    if type(self.matrix[j][k])==int:
+                        print(f"[  ]",end = '')
+                    else:
+                        print(f"[{self.matrix[j][k]}]",end = '')
+                print("\n")
 
         for j in range(self.clock):
-            print(self.regClock[j])
+            print("Clock ",j,"= ",self.regClock[j])
 
-        for j in range(5):
-            for k in range(len(self.matrix[j])):
-                if type(self.matrix[j][k])==int:
-                    print(f"[  ]",end = '')
-                else:
-                    print(f"[{self.matrix[j][k]}]",end = '')
-            print("\n")
+        
 
     def inicializaPipiline(self,i,uc,memory,ula):
         
@@ -59,24 +70,9 @@ class Pipeline:
         #Etapa1 - Busca e Decodifica
         j=0
         while self.etapa[i] == 0:
-            # if(self.tratar[i] % 2 !=0):
-            #     self.using[i].clear()
-            #     self.using[i].append("MAR")
-            #     if(i==0):
-            #         self.tratar[i]+=1
-            #     else:
-            #         for aux in self.using[i-1]:
-            #             for aux2 in self.using[i]:
-            #                 if(aux==aux2):
-            #                     print("HAZARD")
-            #                     return
-                
-            # if j==0 and self.tratar[i]%2==0:
-            #     uc.incrementarPc()
-            #     self.buscaInstrucao(uc)
-            #     j+=1
 
              if j==0:
+
                 uc.incrementarPc()
                 self.buscaInstrucao(uc)
                 print(f"adding na mtx BI..[{i}][{self.clock}]")
@@ -104,7 +100,7 @@ class Pipeline:
         j=0
         while self.etapa[i] == 2:
             if j==0:
-                resultado=uc.realizaOperacao(ula)
+                resultado, oper=uc.realizaOperacao(ula)
                 self.matrix[i][self.clock]="RE"
                 self.regClock[self.clock]+=f"Instrucao {i}: MBR->{uc.mbr.opcode}|{uc.mbr.operando}, AC->{ula.ac}, MQ->{ula.mq} "
                 print(f"Resultado Instrucao({i}) = {resultado}")
@@ -116,10 +112,10 @@ class Pipeline:
         print("Writing...")
         while self.etapa[i] == 3:
             if j==0:
-                if uc.mbr.opcode =="0001" or uc.mbr.opcode =="0010":
+                if oper=="ac":
                     ula.writeAC(resultado)
                     self.regClock[self.clock]+=f"Instrucao {i}: AC->{ula.ac} "
-                elif uc.mbr.opcode =="0011" or uc.mbr.opcode =="0100":
+                elif oper=="mq":
                     ula.writeMQ(resultado)    
                     self.regClock[self.clock]+=f"Instrucao {i}: MQ->{ula.mq} "
                 self.matrix[i][self.clock]="WR"
@@ -140,3 +136,38 @@ class Pipeline:
             print("Realizando operacao...")
             uc.realizaOperacao(ula)
     
+    def conditionHazard(self,etapas,etapa, limite,indice):
+        if(etapa==-1):
+            for i in range(limite):
+                if(etapas[i]==1 and i!=indice):
+                    self.matrix[indice][self.clock]="ZZ"
+                    self.hazards.append("Hazard MAR")
+                    return 0
+        elif(etapa==0):
+            for i in range(limite):
+                if(etapas[i]==0 and i!=indice):
+                    self.matrix[indice][self.clock]="ZZ"
+                    self.hazards.append("Hazard MAR")
+                    return 0
+                elif(etapas[i]==2 and i!=indice):
+                    self.matrix[indice][self.clock]="ZZ"
+                    self.hazards.append("Hazard MBR")
+                    return 0
+        elif(etapa==1):
+            for i in range(limite):
+                if(etapas[i]==1 and i!=indice):
+                    self.matrix[indice][self.clock]="ZZ"
+                    self.hazards.append("Hazard MBR")
+                    return 0
+                elif(etapas[i]==3 and i!=indice):
+                    self.matrix[indice][self.clock]="ZZ"
+                    self.hazards.append("Hazard AC/MQ")
+                    return 0
+        elif(etapa==2):
+            for i in range(limite):
+                if(etapas[i]==2 and i!=indice):
+                    self.matrix[self.indice][self.clock]="ZZ"
+                    self.hazards.append("Hazard AC/MQ")
+                    return 0
+ 
+        return 1

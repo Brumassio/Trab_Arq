@@ -12,6 +12,7 @@ def ajudaATransformar(num):
 def transformarNegativo(num):
 
     string_list = list(num)
+
     aux=(len(num)-ajudaATransformar(num))-1
     if aux!=-1:
         while aux>=0:
