@@ -34,6 +34,7 @@ uc.adicionarEnderecoPc("00000101")
 
 pipeline = Pipeline()
 pipeline.carroChefe(uc,memory,ula)
+
 # class Pipeline:
 #     def __init__(self):
 #         self.etapa = [None]*5
