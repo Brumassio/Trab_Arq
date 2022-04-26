@@ -16,9 +16,7 @@ def transformarNegativo(num):
     if aux!=-1:
         while aux>=0:
             string_list[aux]=str(int(not(int(num[aux]))))
-            aux-=1
-
-    string_list[0]="1"        
+            aux-=1       
     num= "".join(string_list)
     #print(num)
     return num   

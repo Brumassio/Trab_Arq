@@ -23,7 +23,6 @@ class Uc:
         self.count+=1
 
 
-
         
     # def printarPcAtual(self):
     #     print(self.pc[self.count].getOpcode())
@@ -45,48 +44,56 @@ class Uc:
        
     def realizaOperacao(self, ula):
         operando  =self.mbr.operando
-        # ac=ula.ac                                         
-        # mq=ula.mq                                         
+        ac=ula.readAC()                                        
+        mq=ula.readMQ()                                        
         if self.mbr.opcode =="0001":
-            # self.ac += self.mbr.mantica
+
             if self.mbr.operando[:6]=="000000":
-                resultado= ula.soma(operando[7:])
+                resultado= ula.soma(ac,operando[7:])
+                print(f"resultado soma={resultado}")
+                return resultado
             elif self.mbr.operando[7:]=="000000":
-                resultado=ula.soma(operando[:6])
+                resultado=ula.soma(ac,operando[:6])
+                print(f"resultado soma={resultado}")
+                return resultado
             else:
-                resultado=ula.soma2(operando[:6],operando[7:])
+                resultado=ula.soma(operando[:6],operando[7:])
+                print(f"resultado soma={resultado}")
+                return resultado
 
         elif self.mbr.opcode =="0010":
-            # self.ac += self.mbr.mantica
+
             if self.mbr.operando[:6]=="000000":
-                print("entrou aqui ")
-                resultado=ula.subtracao(operando[7:])
+                resultado=ula.subtracao(ac,operando[7:])
+                return resultado
             elif self.mbr.operando[7:]=="000000":
-                print("entrou aqui2 ")
-                resultado=ula.subtracao(operando[:6])
+                resultado=ula.subtracao(ac,operando[:6])
+                return resultado
             else:
-                print("entrou aqui3 ")
-                resultado=ula.subtracao2(operando[:6],operando[7:])
+                resultado=ula.subtracao(operando[:6],operando[7:])
+                return resultado
 
         elif self.mbr.opcode =="0011":
-
             if self.mbr.operando[:6]=="000000":
-                print("ENTROU MESMO OK? VIU BRUMAS XD BRUMAS")
-                resultado=ula.divisao(operando[7:])
+                resultado=ula.divisao(mq,operando[7:])
+                return resultado
             elif self.mbr.operando[7:]=="000000":
-               resultado=ula.divisao(operando[:6])
+               resultado=ula.divisao(mq,operando[:6])
+               return resultado
             else:
-                resultado=ula.divisao2(operando[:6],operando[7:]) 
+                resultado=ula.divisao(operando[:6],operando[7:]) 
+                return resultado
                 
         elif self.mbr.opcode =="0100": 
             
-            print("aq1")
-            # self.mq += self.mbr.mantica
             if self.mbr.operando[:6]=="000000":
-                 resultado=ula.multiplicacao(operando[7:])
+                 resultado=ula.multiplicacao(mq,operando[7:])
+                 return resultado
             elif self.mbr.operando[7:]=="000000":
-                resultado=ula.multiplicacao(operando[:6])
+                resultado=ula.multiplicacao(mq,operando[:6])
+                return resultado
             else:
-                resultado=ula.multiplicacao2(operando[:6],operando[7:])
+                resultado=ula.multiplicacao(operando[:6],operando[7:])
+                return resultado
             
         return resultado

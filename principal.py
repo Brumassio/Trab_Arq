@@ -1,8 +1,6 @@
 from instrucao import Instrucao
 from uc import Uc              
-import numpy as np
 from tools import *
-from auxliar import *
 from ula import *
 from pipeline import *
 
