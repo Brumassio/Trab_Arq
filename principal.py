@@ -33,65 +33,9 @@ uc.adicionarEnderecoPc("00000101")
 pipeline = Pipeline()
 pipeline.carroChefe(uc,memory,ula)
 
-# class Pipeline:
-#     def __init__(self):
-#         self.etapa = [None]*5
-
-#     def carroChefe(self,uc,memory,ula):
-#         i=0
-#         limite=1
-#         while self.etapa[4]!=4:
-#             while(i<limite):
-#                 if(self.etapa[i]!=4):
-#                     self.inicializarPipiline(i,uc,memory,ula)
-#                 i+=1
-#             if limite<=5:
-#                 limite+=1
-#             i=0
 
 
-#     def inicializaPipiline(self,i,uc,memory,ula):
-#         if(self.etapa[i]==0):
-#             self.buscaInstrucao(uc)
-#             self.etapa[i]+=1   
-#         elif self.etapa[i]==1:
-#              if uc.buscaMemoria(memory):#seta o mbr
-#                 print("IR recebendo o opcode (self.ir = self.mbr.opcode)")
-#                 uc.setRegistradores()
-#                 self.etapa[i]+=1
-#         elif self.etapa[i]==2:
-#             print("Realizando operacao...")
-#             uc.realizaOperacao(ula)
-#             self.etapa[i]+=1
-#         elif self.etapa[i]==3:
-#             uc.incrementarPc()
-#             self.etapa[i]+=1
-        
-        
-
-
-   
-
-
-# while uc.count <len(uc.pc):
-    
-#     uc.setMar()
-#     print(f"MAR recebendo PC na posição count (Endereco Instrucao = {uc.mar})")
-#     print(f"Buscando na memoria a instrucao...")
-#     if uc.buscaMemoria(memory):#seta o mbr
-#         print("IR recebendo o opcode (self.ir = self.mbr.opcode)")
-#         uc.setRegistradores()
-#         print("Realizando operacao...")
-#         uc.realizaOperacao(ula)
-    
-
-#     uc.incrementarPc()
-
-
-    # os.system("pause")
-    
-
-
+#TESTE DAS OPERACOES
 # n1="0110"
 # n2="110"
 # resultado=""
