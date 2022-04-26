@@ -1,5 +1,6 @@
 from operator import concat
-from tools import ajudaATransformar, transformarNegativo, complementoDois, igualaCasas, verificaSinalMagnita
+import os
+from tools import ajudaATransformar, transformarNegativo, complementoDois, igualaCasas, verificaSinalMagnita, complementoDois2
 class ula:
     def __init__(self):
         self.ac=""
@@ -54,53 +55,62 @@ class ula:
             resultado += str(carryin) 
             return resultado[::-1]
 
-    def subtracao2(self,n1,n2):
-        igualaCasas(n1,n2)
+    def subtracao2(self,n1,n2): 
+        
         print(f"ME NOTA PEDRAUM SENPAI ! -> n1:{n1}, n2:{n2}")
         if verificaSinalMagnita(n1,n2) == 2:
-            n1 = transformarNegativo(n1[2:6])
-            n2 = transformarNegativo(n2[8:])
+            n2 = transformarNegativo(n2)
+            n1,n2=igualaCasas(n1,n2)
             subtr = self.soma2(n1,n2)
-            return subtr
+            return subtr[2:]
         elif verificaSinalMagnita(n1,n2) == 0:
-            n1 = transformarNegativo(n1[2:6])
+            n2 = transformarNegativo(n2)
+            n1,n2=igualaCasas(n1,n2)
             subtr = self.soma2(n1,n2)
-            return subtr
+            return subtr[2:]
         elif verificaSinalMagnita(n1,n2) == 1:
-            n2 = transformarNegativo(n2[8:])
+            
+            n2 = transformarNegativo(n2)
+            n1,n2=igualaCasas(n1,n2)
+            print("n2=",n2)
             subtr = self.soma2(n1,n2)
-            return subtr
+            print("resultado=",subtr)
+            return subtr[2:]
         elif verificaSinalMagnita(n1,n2) == 3:
             print("estou no if == 0")
             n2 = transformarNegativo(n2)
+
+            n1,n2=igualaCasas(n1,n2)
+            print("n2=",n2)
             subtr = self.soma2(n1,n2)
-            return subtr
+            print("resultado=",subtr)
+            return subtr[2:]
 
     def subtracao(self,n1):
-        igualaCasas(n1,self.ac)
+        n1,self.ac = igualaCasas(n1,self.ac)
         if verificaSinalMagnita(n1,self.ac) == 2:
             print("estou no if == 2")
-            n1 = transformarNegativo(n1)
-            aux = transformarNegativo(self.ac)
-            self.ac = aux
-            subtr = self.soma2(n1,aux)
+            self.ac = transformarNegativo(self.ac)
+            subtr = self.soma2(n1,self.ac)
+            self.ac = subtr
             return subtr
         elif verificaSinalMagnita(n1,self.ac) == 0:
             print("estou no if == 0")
-            n1 = transformarNegativo(n1)
+            self.ac = transformarNegativo(self.ac)
             subtr = self.soma2(n1,self.ac)
+            self.ac = subtr
             return subtr
         elif verificaSinalMagnita(n1,self.ac) == 1:
             print("estou no if == 1")
-            aux = transformarNegativo(self.ac)
-            self.ac = aux
-            subtr = self.soma2(n1,aux)
+            self.ac = transformarNegativo(self.ac)
+            subtr = self.soma2(n1,self.ac)
+            self.ac = subtr
             return subtr
         elif verificaSinalMagnita(n1,self.ac) == 3:
             print("estou no if == 3")
-            aux = transformarNegativo(self.ac)
-            self.ac = aux
-            subtr = self.soma2(n1,aux)
+            self.ac = transformarNegativo(self.ac)
+            subtr = self.soma2(n1,self.ac)
+            self.ac = subtr
             return subtr
 
     def multiplicacao2(self,num1,num2):
@@ -215,25 +225,33 @@ class ula:
         den=den[den.find("1"):]
         self.mq=self.mq[self.mq.find("1"):]
 
-        aux=transformarNegativo(complementoDois(den))
+        # aux=transformarNegativo(complementoDois(den))
         print(f"MQ={self.mq} e DEN={den}")
         num=self.mq
         used=len(den)
         resto=num[:used]
-        while ((len(num)-(used))>=0):
-                if(len(resto)==len(den)):
-                    resto=self.soma3(complementoDois(resto), aux)
-                    print(f"RESTO={resto}")
+        while ((len(num)-(used))>0):
+                
+                if(len(resto)==len(den) and int(resto,2)>=int(den,2)  or (len(resto)>len(den) and int(resto,2)>=int(den,2)) ):
+                    print(f"Somando {complementoDois(resto)} com {complementoDois(den)}")
+                    resto=self.subtracao2(complementoDois(resto), complementoDois(den))
+                    
+
                     if(int(resto[1:],2)!=0):
                         resto=resto[(resto[1:].find("1")+1):]
+                        print(f"RESTO={resto}")
+                        resultado+="1"
                     else:
                         resto=""
                         resultado+="1"
                 else:
                     if(used!=len(num)):
                         resto+=num[used]
+                        print(f"RESTO={resto}")
                     if(len(resto)<len(den)):
-                        resultado+="0"   
+                        resultado+="0"  
+                    if(len(resto)==len(den) and int(resto,2)<int(den,2)):
+                        resultado+="0"
                     used+=1
         print(f"RESULTADO={resultado}")
         self.mq=resultado
