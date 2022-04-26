@@ -2,6 +2,8 @@ from threading import Thread
 from tools import *
 import os
 import time
+
+
 class Pipeline:
     def __init__(self):
         self.etapa = [-1]*5
@@ -18,8 +20,6 @@ class Pipeline:
         #4- AC
         #5- MQ
         
-
-
     def carroChefe(self,uc,memory,ula):
         limite=0
         self.clock=0
@@ -60,7 +60,8 @@ class Pipeline:
 
         for j in range(self.clock):
             print("Clock ",j,"= ",self.regClock[j])
-
+        for x in threads:
+            x.join()
         
 
     def inicializaPipiline(self,i,uc,memory,ula):
