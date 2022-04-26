@@ -49,44 +49,44 @@ class Uc:
         # mq=ula.mq                                         
         if self.mbr.opcode =="0001":
             # self.ac += self.mbr.mantica
-            if self.mbr.operando[:6]=="00000":
+            if self.mbr.operando[:6]=="000000":
                 resultado= ula.soma(operando[7:])
-            elif self.mbr.operando[7:]=="00000":
+            elif self.mbr.operando[7:]=="000000":
                 resultado=ula.soma(operando[:6])
             else:
                 resultado=ula.soma2(operando[:6],operando[7:])
 
         elif self.mbr.opcode =="0010":
             # self.ac += self.mbr.mantica
-            if self.mbr.operando[:5]=="00000":
+            if self.mbr.operando[:6]=="000000":
                 print("entrou aqui ")
                 resultado=ula.subtracao(operando[7:])
-            elif self.mbr.operando[7:]=="00000":
+            elif self.mbr.operando[7:]=="000000":
                 print("entrou aqui2 ")
-                resultado=ula.subtracao(operando[:5])
+                resultado=ula.subtracao(operando[:6])
             else:
                 print("entrou aqui3 ")
-                resultado=ula.subtracao2(operando[:5],operando[7:])
+                resultado=ula.subtracao2(operando[:6],operando[7:])
 
         elif self.mbr.opcode =="0011":
 
-            if self.mbr.operando[:5]=="00000":
+            if self.mbr.operando[:6]=="000000":
                 print("ENTROU MESMO OK? VIU BRUMAS XD BRUMAS")
                 resultado=ula.divisao(operando[7:])
-            elif self.mbr.operando[7:]=="00000":
-               resultado=ula.divisao(operando[:5])
+            elif self.mbr.operando[7:]=="000000":
+               resultado=ula.divisao(operando[:6])
             else:
-                resultado=ula.divisao2(operando[:5],operando[7:]) 
+                resultado=ula.divisao2(operando[:6],operando[7:]) 
                 
         elif self.mbr.opcode =="0100": 
             
             print("aq1")
             # self.mq += self.mbr.mantica
-            if self.mbr.operando[:5]=="00000":
+            if self.mbr.operando[:6]=="000000":
                  resultado=ula.multiplicacao(operando[7:])
-            elif self.mbr.operando[7:]=="00000":
-                resultado=ula.multiplicacao(operando[:5])
+            elif self.mbr.operando[7:]=="000000":
+                resultado=ula.multiplicacao(operando[:6])
             else:
-                resultado=ula.multiplicacao2(operando[:5],operando[7:])
+                resultado=ula.multiplicacao2(operando[:6],operando[7:])
             
         return resultado
